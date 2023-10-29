@@ -42,7 +42,7 @@ class ArvoreBinaria:
 
     def altura(self, no=None):
         if no is None:
-            no = self.root
+            no = self.raiz
 
         altura_esquerda = 0
         altura_direita = 0
