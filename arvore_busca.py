@@ -34,3 +34,19 @@ class ArvoreBinariaDeBusca:
         if altura_dir > altura_esq:
             return altura_dir + 1
         return altura_esq + 1
+
+    def insercao(self, valor):
+        pai = None  # Elemento pai que compararemos se maior ou menor
+        x = self.raiz  # variavel auxiliar que inicia na raiz
+        while x:
+            pai = x
+            if valor < x.valor:
+                x = x.esquerda
+            else:
+                x = x.direita
+        if pai is None:
+            self.root = No(valor)
+        elif valor < pai.valor:
+            pai.esquerda = No(valor)
+        else:
+            pai.direita = No(valor)
