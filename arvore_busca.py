@@ -50,3 +50,32 @@ class ArvoreBinariaDeBusca:
             pai.esquerda = No(valor)
         else:
             pai.direita = No(valor)
+
+    def min(self, no=None):
+        if no is None:
+            no = self.raiz
+        while no.esquerda:
+            no = no.esquerda
+        return no.valor
+
+    def remove(self, valor, no=None):
+        if no == self.raiz:
+            no = self.raiz
+
+        if no is None:
+            return no
+
+        if valor < no.valor:
+            no.esquerda = self.remove(valor, no.esquerda)
+        elif valor > no.valor:
+            no.direita = self.remove(valor, no.direita)
+        else:
+            if no.esquerda is None:
+                return no.direita
+            elif no.direita is None:
+                return no.esquerda
+            else:
+                substituto = self.root.min
+                no.valor = substituto
+                no.direita = self.remove(substituto, no.direita)
+        return no
