@@ -1,0 +1,81 @@
+busca(pont, chave):
+  if(pont == nulo) then:
+    f = 0
+  else:
+    if(chave == pont.valor) then:
+      f = 1
+    else:
+      if(chave.valor < pont.valor) then:
+        if(pont.esq == nulo) then:
+          f = 2
+        else:
+          pont = pont.esq
+          pont, f = busca(pont, chave)
+      else:
+        if(pont.dir == nulo) then:
+          f = 3
+        else:
+          pont = pont.dir
+          pont, f = busca(pont, chave)
+  return pont, f
+
+inclusao(chave, raiz):
+  if(raiz == nulo):
+    novo = No()
+    novo.valor = chave
+    novo.esq = nulo
+    novo.dir = nulo
+    raiz = novo
+  else:
+    pont = raiz
+    pont, f = busca(pont, chave)
+    if(f == 1) then:
+      print("chave já existe")
+    else:
+      novo = No()
+      novo.valor = chave
+      novo.dir = nulo
+      novo.esq = nulo
+      if(f == 2) then:
+        pont.esq = novo
+      else:
+        pont.dir = novo
+  return raiz
+
+exclusão(raiz, chave):
+  pont, f, pai = busca(chave, raiz)
+  if(f==1) then:
+    if pont.esq == nulo then:
+      if(pont == raiz) then:
+        raiz = pont.dir
+      else: 
+        if pont == pai.esq then:
+          pai.esq = pont.dir
+        else:
+          pai.dir = pont.dir
+    else:
+      if pont.dir == nulo then:
+        if pont == raiz then:
+          raiz = pont.esq
+        else:
+          if pont == pai.esq then:
+            pai.esq = pont.esq
+          else: 
+            pai.dir = pont.esq
+      else:
+        y = pont.dir
+        paiy = pont
+        while y.esq != nulo:
+          paiy = y
+          y = y.esq
+        if(paiy != pont) then:
+          paiy.esq = y.dir
+          y.dir = pont.dir
+        y.esq = pont.esq
+      if(pont == raiz) then:
+        raiz = y
+      else:
+        if pont = pai.esq then:
+          pai.esq = y
+        else:
+          pai.dir = y
